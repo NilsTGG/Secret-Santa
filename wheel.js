@@ -1,10 +1,12 @@
+import { getNames, saveNames, getLog, saveLog } from './names.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const spinButton = document.getElementById('spinButton');
     const result = document.getElementById('result');
     const userNameInput = document.getElementById('userNameInput');
 
-    let names = JSON.parse(localStorage.getItem('names')) || [];
-    let log = JSON.parse(localStorage.getItem('log')) || [];
+    let names = getNames();
+    let log = getLog();
 
     spinButton.addEventListener('click', () => {
         const userName = userNameInput.value.trim();
@@ -15,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const selectedName = filteredNames[randomIndex];
                 result.textContent = `You got: ${selectedName}`;
                 names = names.filter(name => name !== selectedName);
-                localStorage.setItem('names', JSON.stringify(names));
+                saveNames(names);
                 log.push(`${userName} spinned ${selectedName}`);
-                localStorage.setItem('log', JSON.stringify(log));
+                saveLog(log);
                 spinButton.disabled = true;
                 userNameInput.disabled = true;
             } else {

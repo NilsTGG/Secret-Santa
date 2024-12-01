@@ -1,3 +1,5 @@
+import { getNames, saveNames } from './names.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const nameForm = document.getElementById('nameForm');
     const nameInput = document.getElementById('nameInput');
@@ -5,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateLinkButton = document.getElementById('generateLink');
     const shareableLinkContainer = document.getElementById('shareableLinkContainer');
 
-    let names = [];
+    let names = getNames();
 
     nameForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -14,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             names.push(name);
             updateNameList();
             nameInput.value = '';
+            saveNames(names);
         }
     });
 
@@ -22,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('names', JSON.stringify(names));
             const shareableLink = `${window.location.origin}${window.location.pathname.replace('index.html', '')}wheel.html`;
             shareableLinkContainer.innerHTML = `<a href="${shareableLink}" target="_blank">${shareableLink}</a>`;
+            saveNames(names);
         }
     });
 
