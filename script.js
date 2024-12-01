@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     generateLinkButton.addEventListener('click', () => {
         if (names.length > 0) {
-            const shareableLink = `${window.location.origin}${window.location.pathname.replace('index.html', '')}wheel.html`;
             localStorage.setItem('names', JSON.stringify(names));
+            const shareableLink = `${window.location.origin}${window.location.pathname.replace('index.html', '')}wheel.html`;
             shareableLinkContainer.innerHTML = `<a href="${shareableLink}" target="_blank">${shareableLink}</a>`;
         }
     });
